@@ -35,4 +35,18 @@ class View {
     let nodeParent = document.querySelector('#outer'); // je selectionne dans le HTML le div avec l'id outer
     nodeParent.appendChild(this.div);
   }
+
+    createInputs(number) {
+      // Clear existing inputs
+      this.inputs.forEach(input => this.div.removeChild(input));
+      this.inputs = [];
+  
+      // Create new inputs
+      for (let i = 0; i < number; i++) {
+        let input = document.createElement('input');
+        input.type = 'text';
+        this.div.appendChild(input);
+        this.inputs.push(input);
+      }
+  }
 }

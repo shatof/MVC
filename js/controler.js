@@ -36,19 +36,26 @@ class UpdateHey extends Observer {
   }
 
   update(observable) {
-    if (observable.textent == 'achtoung') {
       this.view.res.textContent = observable.textent;
       this.view.boutonMDR.disabled = true;
-   }
+  }
+}
+
+class UpdateNbInputs extends Observer {
+  constructor(view) {
+    super();
+    this.view = view;
+  }
+
+  update(observable) {
+    this.view.createInputs(observable.nbInputs);
   }
 }
 
 
 
 class Controler {
-
   constructor(model) {
-
     this.view = new View();
     this.model = model;
 
@@ -62,7 +69,10 @@ class Controler {
     let updateHey = new UpdateHey(this.view);
     this.model.addObservers(updateHey);
 
-    //  action
+    let updateNbInputs = new UpdateNbInputs(this.view);
+    this.model.addObservers(updateNbInputs);
+
+    // action
     let actionPlus = (event) => {
       this.model.plus();
     }
@@ -71,13 +81,22 @@ class Controler {
       this.model.moins();
     }
 
+    let actionCliqueMDR = (event) => {
+      changeTexte();
+    }
+
     let changeTexte = (event) => {
       this.model.setTexte(this.view.champRNG.value);
     }
 
+    this.view.boutonMDR.addEventListener('click', actionCliqueMDR);
     this.view.boutonPlus.addEventListener('click', actionPlus);
     this.view.boutonMoins.addEventListener('click', actionMoins);
-    this.view.champRNG(addEventListener('change', changeTexte));
+    //this.view.champRNG(addEventListener('change', changeTexte));
 
+    // Example: set the number of inputs
+    this.model.nbInputs = 5;
+    this.model.setChanged();
+    this.model.notifyObservers();
   }
 }

@@ -25,10 +25,14 @@ class Model extends Observable {
     }
 
     setTexte(texte) {
-        this.textent = texte//.concat('la merde');
+        this.textent = texte.concat('la merde');
         this.setChanged();
         this.notifyObservers();
       }
 
-
+      setNbInputs(nb) {
+        this.nbInputs = nb;
+        this.setChanged();
+        this.notifyObservers();
+      }
 }
