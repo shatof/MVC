@@ -14,36 +14,19 @@ class Model extends Observable {
             "Mulhouse", "Caen", "Nancy", "Argenteuil", "Saint-Denis", "Montreuil", "Roubaix", "Dunkerque", "Tourcoing",
             "Nanterre", "Avignon", "Créteil", "Poitiers", "Versailles", "Pau", "Courbevoie", "Vitry-sur-Seine", "Colombes", "Aulnay-sous-Bois"
           ];
+        this.suggestions = [];
     }
 
-    setListeVilles(listeVilles) {
-        this.listeVilles = listeVilles;
+    changeSuggestions(input) {
+        // Filtrer sans modifier la liste complète des villes
+        this.suggestions = this.listeVilles.filter(ville => ville.toLowerCase().startsWith(input.toLowerCase()));
         this.setChanged();
         this.notifyObservers();
     }
-
-
-    updateSuggestions(input) {
-        let suggestions = this.listeVilles.filter(ville => ville.toLowerCase().startsWith(input.toLowerCase()));
-        this.setListeVilles(suggestions);
-      }
 
     setVille(ville) {
         this.ville = ville;
         this.setChanged();
         this.notifyObservers();
     }
-    
-    // setNbInputs(nb) {
-    //     this.nbInputs = nb;
-    //     this.setChanged();
-    //     this.notifyObservers();
-    // }
-
-    
-    // setInputs(inputs) {
-    //     this.inputs = inputs;
-    //     this.setChanged();
-    //     this.notifyObservers();
-    // }
 }

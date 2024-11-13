@@ -5,8 +5,9 @@ class UpdateRemplissage extends Observer {
   }
 
   update(observable) {
-    this.view.suggestionsList.innerHTML = ''; // Clear previous suggestions
-    observable.listeVilles.forEach(ville => {
+    this.view.suggestionsList.innerHTML = ''; // vide le champ
+
+    observable.suggestions.forEach(ville => {
       let li = document.createElement('li');
       li.textContent = ville;
       li.addEventListener('click', () => {
@@ -46,7 +47,7 @@ class Controler {
 
     
     let actionChangeSuggestions = (event) => {
-      this.model.updateSuggestions(event.target.value);
+      this.model.changeSuggestions(event.target.value);
     }
 
     
