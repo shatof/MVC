@@ -4,9 +4,7 @@ class View {
 
     //Si on est dans l'indexe
       // Titre
-      this.title = document.createElement('h1');
-      this.title.textContent = 'CHOIX SALLE';
-      this.div.appendChild(this.title);
+
 
       // Add sous-titre
       this.subtitle = document.createElement('p');
@@ -49,6 +47,7 @@ class View {
 
       // pour le css
       this.div.className = 'div';
+      this.confirmer.className = 'button';
       this.suggestionsList.className = 'suggestionsList';
       this.sallesList.className = 'sallesList';
     

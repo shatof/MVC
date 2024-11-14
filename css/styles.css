@@ -70,7 +70,18 @@ body {
 }
 
 .button {
-  margin-top: 20px; /* Optionnel : ajoute un espace au-dessus du bouton */
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #5CDB95;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #379683;
 }
 
 .textField {
@@ -119,7 +130,7 @@ body {
 }
 
 .salle.selected {
-  border: 3px solid #0f0bff; /* Bordure verte pour indiquer la sélection */
+  border: 3px solid #5CDB95; /* Bordure verte pour indiquer la sélection */
   background-color: #d4f5e9; /* Couleur de fond différente pour indiquer la sélection */
 }
 
