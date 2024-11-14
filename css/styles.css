@@ -1,5 +1,6 @@
 html {
-  font-size: 25px; /* Augmenté */
+  font-size: 30px;
+  /* Augmenté */
   font-family: 'Roboto', sans-serif;
 }
 
@@ -36,7 +37,7 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ebebeb;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -48,7 +49,8 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #5CDB95;
-  height: 150px; /* Augmenté */
+  height: 150px;
+  /* Augmenté */
   padding: 20px;
   width: 100%;
 }
@@ -66,7 +68,8 @@ body {
 
 #title {
   color: #e0e0e0;
-  font-size: 2.5rem; /* Augmenté */
+  font-size: 2.5rem;
+  /* Augmenté */
 }
 
 .button {
@@ -101,7 +104,8 @@ body {
 }
 
 .suggestionsList li:hover {
-  background-color: #e0e0e0; /* Gris clair lorsqu'on passe la souris */
+  background-color: #e0e0e0;
+  /* Gris clair lorsqu'on passe la souris */
 }
 
 .sallesList {
@@ -122,16 +126,20 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
   width: 200px;
-  cursor: pointer; /* Indique que c'est cliquable */
+  cursor: pointer;
+  /* Indique que c'est cliquable */
 }
 
 .salle:hover {
-  background-color: #e0e0e0; /* Gris clair lorsqu'on passe la souris */
+  background-color: #e0e0e0;
+  /* Gris clair lorsqu'on passe la souris */
 }
 
 .salle.selected {
-  border: 3px solid #5CDB95; /* Bordure verte pour indiquer la sélection */
-  background-color: #d4f5e9; /* Couleur de fond différente pour indiquer la sélection */
+  border: 3px solid #5CDB95;
+  /* Bordure verte pour indiquer la sélection */
+  background-color: #d4f5e9;
+  /* Couleur de fond différente pour indiquer la sélection */
 }
 
 .salle-logo {
@@ -156,7 +164,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px; /* Optionnel : ajoute un espace au-dessus du bouton */
+  margin-top: 20px;
+  /* Optionnel : ajoute un espace au-dessus du bouton */
 }
 
 .notification {
@@ -164,7 +173,8 @@ body {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #28a745; /* Vert pour succès */
+  background-color: #28a745;
+  /* Vert pour succès */
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -186,5 +196,86 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Style de la liste des suggestions */
+.suggestionsMusiqueList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Style des éléments de la liste des suggestions */
+.suggestionsMusiqueList li {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
 
+/* Image de la pochette de musique */
+.music-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+/* Texte du titre et de l'artiste */
+.suggestionsMusiqueList li span {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Effet au survol */
+.suggestionsMusiqueList li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Style quand un élément est sélectionné */
+.suggestionsMusiqueList li.selected {
+  background-color: #e0e0ff;
+}
+
+/* Style pour la liste de la file d'attente */
+.file-attente {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  /* Permet de défiler horizontalement si trop d'éléments */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour chaque élément de la file d'attente */
+.file-attente li {
+  list-style: none;
+  text-align: center;
+  width: 80px;
+}
+
+/* Style de l'image de couverture dans la file d'attente */
+.file-attente .music-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+}
+
+/* Style pour le texte du titre et de l'artiste */
+.file-attente span {
+  display: block;
+  font-size: 12px;
+  color: #333;
+  margin-top: 5px;
+}
+
+.file-attente:empty {
+  display: none;
+}

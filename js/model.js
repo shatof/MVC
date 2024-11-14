@@ -21,6 +21,8 @@ class Model extends Observable {
         this.salleChoisie = '';
         this.messageaafficher = ''
         this.salleSelectionnee = null
+        this.suggestionsMusique = [];
+        this.fileAttente = []; 
     }
 
     changeSuggestions(input) {
@@ -58,5 +60,37 @@ class Model extends Observable {
             this.notifyObservers();
         }
     }
+
+    // methode utilisant l'appli itnues pour recuperer des suggestions de musique
+    async changeSuggestionsMusique(input) {
+        if (input === '') {
+            this.suggestionsMusique = [];
+        } else {
+            try {
+                let response = await fetch(`https://itunes.apple.com/search?term=${input}&limit=5`);               
+                let data = await response.json();
+
+                this.suggestionsMusique = data.results.map(musique => ({
+                    artist: musique.artistName,
+                    title: musique.trackName,
+                    cover: musique.artworkUrl100  
+                }));
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des suggestions de musique:', error);
+                this.suggestionsMusique = [];
+            }
+        }
+        this.setChanged();
+        this.notifyObservers();
+    }
+    
+    ajouterALaFile(musique) {
+        this.fileAttente.push(musique);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    
     
 }
