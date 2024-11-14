@@ -5,15 +5,15 @@ class UpdateRemplissage extends Observer {
   }
 
   update(observable) {
-    this.view.suggestionsList.innerHTML = ''; // vide le champ
-
+    this.view.suggestionsList.innerHTML = ''; // pour que les suggestions disparraissent après avoir choisi une ville
+    // pour chaque suggestion, ça affiche ce qui correspond
     observable.suggestions.forEach(ville => {
       let li = document.createElement('li');
       li.textContent = ville;
+      // ici je suis obligé de faire une ACTION dans le update car elles sont crées lors de leur création
       li.addEventListener('click', () => {
         observable.setVille(ville);
-        this.view.champRecherche.value = ville; // Met à jour le champ de recherche
-
+        this.view.champRecherche.value = ville; // quand je clique sur la ville ça remplace le champ recherche
       });
       this.view.suggestionsList.appendChild(li);
     });
@@ -27,7 +27,11 @@ class UpdateVille extends Observer {
   }
 
   update(observable) {
-    this.view.resVille.textContent = `Vous avez sélectionné la ville : ${observable.ville}`;
+    if (observable.ville) { // si une ville a été selectionné
+      this.view.resVille.textContent = `Selectionnez votre salle de sport parmis les salles situées à ${observable.ville}`;
+    } else {
+      this.view.resVille.textContent = ''; // Vide le message si aucune ville n'est sélectionnée
+    }
   }
 }
 
@@ -42,9 +46,7 @@ class UpdateSalles extends Observer {
       this.view.sallesList.innerHTML = ''; // vide le champ si aucune ville n'est sélectionnée
       return;
     }
-
     this.view.sallesList.innerHTML = ''; // vide le champ
-
     observable.salles.forEach(salle => {
       let div = document.createElement('div');
       div.className = 'salle';
@@ -60,66 +62,71 @@ class UpdateSalles extends Observer {
       let address = document.createElement('p');
       address.textContent = salle.address;
       address.className = 'salle-address';
-      
-
-      div.addEventListener('click', () => {
-        observable.setSalle(salle); // Actualise la salle choisie dans le modèle
-      });
 
       div.appendChild(img);
       div.appendChild(name);
       div.appendChild(address);
+
+      // Applique la classe 'selected' si cette salle est la salle sélectionnée
+      if (observable.salleSelectionnee && observable.salleSelectionnee.name === salle.name) {
+        div.classList.add('selected');
+      }
+
+      div.addEventListener('click', () => {
+        // Supprime la classe 'selected' de toutes les autres salles
+        Array.from(this.view.sallesList.children).forEach(child => {
+          child.classList.remove('selected');
+        });
+
+        // Ajoute la classe 'selected' à la salle cliquée
+        div.classList.add('selected');
+        observable.setSalle(salle); // Actualise la salle choisie dans le modèle
+      });
+
       this.view.sallesList.appendChild(div);
-
-
-
     });
   }
 }
 
-// class UpdateSalleChoisie extends Observer {
-//   constructor(view) {
-//     super();
-//     this.view = view;
-//   }
 
-//   update(observable) {
-//     this.view.salleChoisie.innerHTML = ''; // Vide l'affichage précédent
+class UpdateAffichageSalleChoisie extends Observer {
+  constructor(view) {
+    super();
+    this.view = view;
 
-//     if (observable.salleChoisie) {
-//       const salle = observable.salleChoisie;
+    // Création de l'élément de notification
+    this.notification = document.createElement('div');
+    this.notification.className = 'notification';
+    this.notification.style.display = 'none';
+    document.body.appendChild(this.notification);
+  }
 
-//       let div = document.createElement('div');
-//       div.className = 'salle-choisie';
+  update(observable) {
+    // Affiche la notification si un message est défini dans le modèle
+    if (observable.messageaafficher) {
+      this.notification.textContent = observable.messageaafficher;
+      this.notification.style.display = 'block';
+      this.notification.classList.add('show');
 
-//       let img = document.createElement('img');
-//       img.src = salle.logo;
-//       img.className = 'salle-logo';
+      // Masquer la notification après quelques secondes
+      setTimeout(() => {
+        this.notification.style.display = 'none';
+        this.notification.classList.remove('show');
+        observable.messageaafficher = ''; // Réinitialise le message après l'affichage
+      }, 3000);
+    }
+  }
+}
 
-//       let name = document.createElement('h3');
-//       name.textContent = salle.name;
-//       name.className = 'salle-name';
 
-//       let address = document.createElement('p');
-//       address.textContent = salle.address;
-//       address.className = 'salle-address';
 
-//       div.appendChild(img);
-//       div.appendChild(name);
-//       div.appendChild(address);
-//       this.view.salleChoisie.appendChild(div);
-//     }
-//   }
-// }
 
 
 
 class Controler {
   constructor(model) {
-
     this.view = new View();
     this.model = model;
-
 
     let updateRemplissage = new UpdateRemplissage(this.view);
     this.model.addObservers(updateRemplissage);
@@ -130,45 +137,27 @@ class Controler {
     let updateSalle = new UpdateSalles(this.view);
     this.model.addObservers(updateSalle);
 
-    // let updateSalleChoisie = new UpdateSalleChoisie(this.view);
-    // this.model.addObservers(updateSalleChoisie);
+    let updateAffichageSalleChoisie = new UpdateAffichageSalleChoisie(this.view);
+    this.model.addObservers(updateAffichageSalleChoisie);
 
-    //  action
-  
-    
+
+
+    // Action pour le champ de recherche
     let actionChangeSuggestions = (event) => {
       this.model.changeSuggestions(event.target.value);
-    }
+    };
+    // quand j'écris dans le champ de recherche, ça change les suggestions
+    this.view.champRecherche.addEventListener('input', actionChangeSuggestions);
 
-  this.view.champRecherche.addEventListener('input', actionChangeSuggestions);
-  
+    // Action pour le bouton "Confirmer"
+    // Action pour le bouton "Confirmer"
+    this.view.confirmer.addEventListener('click', () => {
+      this.model.setMessageAffichage();
+    });
   }
+
+
+
 }
 
-// class UpdateNbInputs extends Observer {
-//   constructor(view) {
-//     super();
-//     this.view = view;
-//   }
-
-//   update(observable) {
-//     // Clear existing inputs
-//     observable.inputs.forEach(input => this.view.div.removeChild(input));
-//     observable.inputs = [];
-
-//     for (let i = 0; i < observable.nbInputs; i++) {
-//       let input = document.createElement('input');
-//       input.type = 'text';
-//       this.view.div.appendChild(input);
-//       observable.inputs.push(input);
-
-//       input.addEventListener('input', (event) => {
-//         observable.setTexte(input.value);
-//       });
-//     }
-//   }
-// }
-
-  // let actionChangeNbInputs = (event) => {
-    //   this.model.setNbInputs(this.view.nombreInputs.value);
-    // }
+//on peut ajouter un attribut this.page dans le model puis le modifier via une fonction setPage, ainsi qu'utiliser une classe updatePage extends Observer

@@ -3,8 +3,6 @@ class Model extends Observable {
 
     constructor() {
         super();
-        //this.nbInputs = 0;       
-        //this.inputs = [];
         this.ville = '';
         this.listeVilles = [
             "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg", "Montpellier", "Bordeaux", "Lille",
@@ -15,28 +13,14 @@ class Model extends Observable {
         ];
         this.suggestions = [];
         this.salles = [
-            {
-                name: 'Basic-Fit',
-                logo: 'logo/basicfit.png',
-                address: ''
-            },
-            {
-                name: 'KeepCool',
-                logo: 'logo/keepcool.png',
-                address: ''
-            },
-            {
-                name: "L'Orange Bleue",
-                logo: 'logo/orangebleue.png',
-                address: ''
-            },
-            {
-                name: 'Fitness Park',
-                logo: 'logo/fitnesspark.png',
-                address: ''
-            }
+            { name: 'Basic-Fit', logo: 'logo/basicfit.png', address: '' },
+            { name: 'KeepCool', logo: 'logo/keepcool.png', address: '' },
+            { name: "L'Orange Bleue", logo: 'logo/orangebleue.png', address: '' },
+            { name: 'Fitness Park', logo: 'logo/fitnesspark.png', address: '' }
         ];
         this.salleChoisie = '';
+        this.messageaafficher = ''
+        this.salleSelectionnee = null
     }
 
     changeSuggestions(input) {
@@ -62,7 +46,17 @@ class Model extends Observable {
 
     setSalle(salle) {
         this.salleChoisie = salle;
+        this.salleSelectionnee = salle; 
         this.setChanged();
         this.notifyObservers();
     }
+
+    setMessageAffichage() {
+        if (this.salleChoisie) {
+            this.messageaafficher = `Vous avez sélectionné votre salle : ${this.salleChoisie.name} à ${this.salleChoisie.address}`;
+            this.setChanged();
+            this.notifyObservers();
+        }
+    }
+    
 }
