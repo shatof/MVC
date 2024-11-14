@@ -67,7 +67,7 @@ class UpdateSalles extends Observer {
       div.appendChild(name);
       div.appendChild(address);
 
-      // Applique la classe 'selected' si cette salle est la salle sélectionnée
+      // Partie uniquement pour changer l'apparence de la salle sélectionnée
       if (observable.salleSelectionnee && observable.salleSelectionnee.name === salle.name) {
         div.classList.add('selected');
       }
@@ -80,6 +80,8 @@ class UpdateSalles extends Observer {
 
         // Ajoute la classe 'selected' à la salle cliquée
         div.classList.add('selected');
+        //////////////////////////////////////////////
+
         observable.setSalle(salle); // Actualise la salle choisie dans le modèle
       });
 
@@ -119,6 +121,78 @@ class UpdateAffichageSalleChoisie extends Observer {
 }
 
 
+class UpdateMusic extends Observer {
+  constructor(view) {
+    super();
+    this.view = view;
+  }
+
+  update(observable) {
+    this.view.suggestionsMusiqueList.innerHTML = ''; // Efface les suggestions existantes
+    observable.suggestionsMusique.forEach(musique => {
+      let li = document.createElement('li');
+
+      let img = document.createElement('img');
+      img.src = musique.cover;
+      img.alt = `${musique.title} cover`;
+      img.className = 'music-cover';
+
+
+      let text = document.createElement('span');
+      text.textContent = `${musique.artist} - ${musique.title}`;
+
+      li.appendChild(img);
+      li.appendChild(text);
+
+      li.addEventListener('click', () => {
+        this.view.champMusique.value = ""; // Efface le champ de recherche
+        observable.ajouterALaFile(musique); // Ajoute la musique à la file d'attente
+        this.view.suggestionsMusiqueList.innerHTML = ''; // Efface les suggestions
+      });
+
+      this.view.suggestionsMusiqueList.appendChild(li);
+    });
+  }
+}
+
+class UpdateFileDattente extends Observer {
+  constructor(view) {
+    super();
+    this.view = view;
+  }
+
+  update(observable) {
+    // Vide la liste actuelle pour la reconstruire
+    this.view.fileAttente.innerHTML = '';
+
+    if (observable.fileAttente.length === 0) {
+      // Masque la file d'attente si elle est vide
+      this.view.fileAttente.style.display = 'none';
+    } else {
+      // Affiche la file d'attente si elle contient des éléments
+      this.view.fileAttente.style.display = 'flex';
+
+      // Ajoute chaque musique de la file d'attente dans la vue
+      observable.fileAttente.forEach(musique => {
+        let li = document.createElement('li');
+
+        let img = document.createElement('img');
+        img.src = musique.cover;
+        img.alt = `${musique.title} cover`;
+        img.className = 'music-cover';
+
+        let text = document.createElement('span');
+        text.textContent = `${musique.title} - ${musique.artist}`;
+
+        li.appendChild(img);
+        li.appendChild(text);
+
+        this.view.fileAttente.appendChild(li);
+      });
+    }
+  }
+}
+
 
 
 
@@ -140,24 +214,51 @@ class Controler {
     let updateAffichageSalleChoisie = new UpdateAffichageSalleChoisie(this.view);
     this.model.addObservers(updateAffichageSalleChoisie);
 
+    let updateMusic = new UpdateMusic(this.view);
+    this.model.addObservers(updateMusic);
+
+    let updateFileDattente = new UpdateFileDattente(this.view);
+    this.model.addObservers(updateFileDattente);
 
 
-    // Action pour le champ de recherche
     let actionChangeSuggestions = (event) => {
       this.model.changeSuggestions(event.target.value);
     };
-    // quand j'écris dans le champ de recherche, ça change les suggestions
+
     this.view.champRecherche.addEventListener('input', actionChangeSuggestions);
 
-    // Action pour le bouton "Confirmer"
-    // Action pour le bouton "Confirmer"
     this.view.confirmer.addEventListener('click', () => {
-      this.model.setMessageAffichage();
+      if (this.model.salleChoisie && this.model.ville) {
+        this.model.setMessageAffichage();
+        document.title = `${this.model.salleChoisie.name} à ${this.model.ville}`;
+
+        this.view.sallesList.style.display = 'none'; // vire les salles
+        this.view.salleChoisie.style.display = 'none'; // vire la salle choisie
+        this.view.confirmer.style.display = 'none'; // vire le bouton confirmer
+        this.view.champRecherche.style.display = 'none'; // vire le champ de recherche
+        this.view.subtitle.style.display = 'none'; // vire le sous-titre
+        this.view.champMusique.style.display = 'block'; // affiche le champ de recherche de musique
+        this.view.title.textContent = `Connecté à ${this.model.salleChoisie.name} de ${this.model.ville}!`;
+
+      } else {
+        // Affiche un message d'erreur si aucune salle ou ville n'est sélectionnée
+        alert("Veuillez sélectionner une ville et une salle avant de confirmer.");
+      }
+
     });
+
+
+
+    let actionChangeSuggestionsMusique = (event) => {
+      this.model.changeSuggestionsMusique(event.target.value);
+    };
+    
+    this.view.champMusique.addEventListener('input', actionChangeSuggestionsMusique);
+
+
   }
 
 
 
 }
 
-//on peut ajouter un attribut this.page dans le model puis le modifier via une fonction setPage, ainsi qu'utiliser une classe updatePage extends Observer
