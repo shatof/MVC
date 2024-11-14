@@ -1,109 +1,190 @@
-
 html {
-
+  font-size: 25px; /* Augmenté */
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   min-height: 100%;
   height: 100%;
   width: 100%;
-}
-
-.outer{
   display: flex;
-  flex-flow: column;
-  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #EDF5E1;
+  margin: 0;
 }
 
-.top{
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+  max-width: 1200px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.top {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #5CDB95;
-  height: 100px;
+  height: 150px; /* Augmenté */
+  padding: 20px;
+  width: 100%;
 }
 
-.bottom{
+.bottom {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  padding : 10px;
-  flex-grow : 1;
-  background-color: #8EE4AF;
-  border:1px #379683 solid;
+  padding: 10px;
+  flex-grow: 1;
+  background-color: #447958;
+  border: 1px #379683 solid;
   margin-top: 10px;
 }
 
-#title{
-  color : #05386B;
+#title {
+  color: #e0e0e0;
+  font-size: 2.5rem; /* Augmenté */
 }
 
-.button{
-  margin: 0px 20px 0px 0px;
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #5CDB95;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.textField{
+.button:hover {
+  background-color: #379683;
+}
+
+.textField {
   margin: 0px 0px 0px 20px;
 }
 
-.label{
-  margin: 0px 20px 0px 20px;
+.suggestionsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
 }
 
-/*.slider{
-  width: 400px;
-  height: 15px;
+.suggestionsList li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.suggestionsList li:hover {
+  background-color: #e0e0e0; /* Gris clair lorsqu'on passe la souris */
+}
+
+.sallesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.salle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  width: 200px;
+  cursor: pointer; /* Indique que c'est cliquable */
+}
+
+.salle:hover {
+  background-color: #e0e0e0; /* Gris clair lorsqu'on passe la souris */
+}
+
+.salle.selected {
+  border: 3px solid #5CDB95; /* Bordure verte pour indiquer la sélection */
+  background-color: #d4f5e9; /* Couleur de fond différente pour indiquer la sélection */
+}
+
+.salle-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.salle-name {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.salle-address {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Optionnel : ajoute un espace au-dessus du bouton */
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745; /* Vert pour succès */
+  color: white;
+  padding: 10px 20px;
   border-radius: 5px;
-}*/
-
-.slider {
-  -webkit-appearance: none;
-  width: 30%;
-  height: 15px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 1.0;
+  font-size: 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.slider:hover {
+.notification.show {
+  display: block;
   opacity: 1;
 }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #5CDB95;
-  cursor: pointer;
+.selected {
+  border: 5px solid #0f0bff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
-.menu {
-  width: 120px;
-  background-color: #8EE4AF;
-  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.5);
-  position: fixed;
-  display: none;
-}
 
-.menu-options {
-  list-style: none;
-  padding: 10px 0;
-}
-
-.menu-option {
-  font-weight: 500;
-  font-size: 14px;
-  padding: 10px 40px 10px 20px;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(0, 0, 0, 1.0);
-  }
-}
-
-.disabled{
-    pointer-events:none;
-    opacity:0.4;
-}
