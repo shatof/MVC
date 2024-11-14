@@ -1,24 +1,36 @@
 html {
-
+  font-size: 25px; /* Augmenté */
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   min-height: 100%;
   height: 100%;
   width: 100%;
-  background-color: #f0f0f0; /* Gris clair */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #EDF5E1;
+  margin: 0;
 }
 
 .outer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+  max-width: 1200px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .div {
   text-align: center;
-  width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -32,14 +44,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #413840;
-  height: 100px;
-}
-
-#textTitle {
-  font-family: 'Roboto', sans-serif;
-  font-size: 80px; /* Augmenter la taille du titre */
-  color: #ffffff; /* Couleur du texte */
+  background-color: #5CDB95;
+  height: 150px; /* Augmenté */
+  padding: 20px;
+  width: 100%;
 }
 
 .bottom {
@@ -54,7 +62,8 @@ body {
 }
 
 #title {
-  color: #bebebe;
+  color: #e0e0e0;
+  font-size: 2.5rem; /* Augmenté */
 }
 
 .button {
@@ -79,4 +88,41 @@ body {
 
 .suggestionsList li:hover {
   background-color: #e0e0e0; /* Gris clair lorsqu'on passe la souris */
+}
+
+.sallesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.salle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  width: 200px;
+}
+
+.salle-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.salle-name {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.salle-address {
+  font-size: 1rem;
+  color: #555;
 }

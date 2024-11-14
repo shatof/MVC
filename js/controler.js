@@ -12,6 +12,8 @@ class UpdateRemplissage extends Observer {
       li.textContent = ville;
       li.addEventListener('click', () => {
         observable.setVille(ville);
+        this.view.champRecherche.value = ville; // Met à jour le champ de recherche
+
       });
       this.view.suggestionsList.appendChild(li);
     });
@@ -25,12 +27,94 @@ class UpdateVille extends Observer {
   }
 
   update(observable) {
-      this.view.resVille.textContent = `Vous avez sélectionné la ville : ${observable.ville}`;
+    this.view.resVille.textContent = `Vous avez sélectionné la ville : ${observable.ville}`;
   }
 }
 
-class Controler {
+class UpdateSalles extends Observer {
+  constructor(view) {
+    super();
+    this.view = view;
+  }
 
+  update(observable) {
+    if (observable.ville === '') {
+      this.view.sallesList.innerHTML = ''; // vide le champ si aucune ville n'est sélectionnée
+      return;
+    }
+
+    this.view.sallesList.innerHTML = ''; // vide le champ
+
+    observable.salles.forEach(salle => {
+      let div = document.createElement('div');
+      div.className = 'salle';
+
+      let img = document.createElement('img');
+      img.src = salle.logo;
+      img.className = 'salle-logo';
+
+      let name = document.createElement('h3');
+      name.textContent = salle.name;
+      name.className = 'salle-name';
+
+      let address = document.createElement('p');
+      address.textContent = salle.address;
+      address.className = 'salle-address';
+      
+
+      div.addEventListener('click', () => {
+        observable.setSalle(salle); // Actualise la salle choisie dans le modèle
+      });
+
+      div.appendChild(img);
+      div.appendChild(name);
+      div.appendChild(address);
+      this.view.sallesList.appendChild(div);
+
+
+
+    });
+  }
+}
+
+// class UpdateSalleChoisie extends Observer {
+//   constructor(view) {
+//     super();
+//     this.view = view;
+//   }
+
+//   update(observable) {
+//     this.view.salleChoisie.innerHTML = ''; // Vide l'affichage précédent
+
+//     if (observable.salleChoisie) {
+//       const salle = observable.salleChoisie;
+
+//       let div = document.createElement('div');
+//       div.className = 'salle-choisie';
+
+//       let img = document.createElement('img');
+//       img.src = salle.logo;
+//       img.className = 'salle-logo';
+
+//       let name = document.createElement('h3');
+//       name.textContent = salle.name;
+//       name.className = 'salle-name';
+
+//       let address = document.createElement('p');
+//       address.textContent = salle.address;
+//       address.className = 'salle-address';
+
+//       div.appendChild(img);
+//       div.appendChild(name);
+//       div.appendChild(address);
+//       this.view.salleChoisie.appendChild(div);
+//     }
+//   }
+// }
+
+
+
+class Controler {
   constructor(model) {
 
     this.view = new View();
@@ -43,16 +127,21 @@ class Controler {
     let updateVille = new UpdateVille(this.view);
     this.model.addObservers(updateVille);
 
-    //  action
+    let updateSalle = new UpdateSalles(this.view);
+    this.model.addObservers(updateSalle);
 
+    // let updateSalleChoisie = new UpdateSalleChoisie(this.view);
+    // this.model.addObservers(updateSalleChoisie);
+
+    //  action
+  
     
     let actionChangeSuggestions = (event) => {
       this.model.changeSuggestions(event.target.value);
     }
 
-    
-    this.view.champRecherche.addEventListener('input', actionChangeSuggestions);
-
+  this.view.champRecherche.addEventListener('input', actionChangeSuggestions);
+  
   }
 }
 
