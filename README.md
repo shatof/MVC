@@ -26,4 +26,6 @@ Le LLM ChatGPT 3.5 a été utilisé exclusivement pour les parties suivantes :
 
 # Difficultés et conclusion
 
-Les difficultés rencontrées lors de ce projets étaient que je partais de zéro quand au developpement de page web, de nombreux tutos sur le MVC et les Observer sont disponibles cependant je n'en ai pas trouvé les implémentant comme dans les CM et le TP bouton+- c'est à dire de créer une classe Observer pour chaque changement possible dans le model
+Les difficultés rencontrées lors de ce projets étaient que je partais de zéro quand au developpement de page web.
+
+De plus beaucoup d'éléments (liste des villes, liste des musiques, file d'attente) sont générés sur le moment donc dans des listes, il a donc été assez difficile de réussir à generer des attributs pour chaque element de ces listes 

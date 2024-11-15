@@ -157,41 +157,61 @@ class UpdateMusic extends Observer {
 
 class UpdateFileDattente extends Observer {
   constructor(view) {
-    super();
-    this.view = view;
+      super();
+      this.view = view;
   }
 
   update(observable) {
-    // Vide la liste actuelle pour la reconstruire
-    this.view.fileAttente.innerHTML = '';
+      this.view.fileAttente.innerHTML = '';
 
-    if (observable.fileAttente.length === 0) {
-      // Masque la file d'attente si elle est vide
-      this.view.fileAttente.style.display = 'none';
-    } else {
-      // Affiche la file d'attente si elle contient des éléments
-      this.view.fileAttente.style.display = 'flex';
+      observable.fileAttente.forEach((musique, index) => {
+          let li = document.createElement('li');
 
-      // Ajoute chaque musique de la file d'attente dans la vue
-      observable.fileAttente.forEach(musique => {
-        let li = document.createElement('li');
+          let img = document.createElement('img');
+          img.src = musique.cover;
+          img.alt = `${musique.title} cover`;
+          img.className = 'music-cover';
 
-        let img = document.createElement('img');
-        img.src = musique.cover;
-        img.alt = `${musique.title} cover`;
-        img.className = 'music-cover';
+          let text = document.createElement('span');
+          text.textContent = `${musique.title} - ${musique.artist}`;
 
-        let text = document.createElement('span');
-        text.textContent = `${musique.title} - ${musique.artist}`;
+          let scoreText = document.createElement('span');
+          scoreText.textContent = `Score: ${musique.score}`;
+          scoreText.className = 'music-score';
 
-        li.appendChild(img);
-        li.appendChild(text);
+          let btnPlus = document.createElement('button');
+          btnPlus.textContent = '+';
+          btnPlus.className = 'btn-plus';
+          btnPlus.disabled = musique.hasVoted;
 
-        this.view.fileAttente.appendChild(li);
+          let btnMinus = document.createElement('button');
+          btnMinus.textContent = '-';
+          btnMinus.className = 'btn-minus';
+          btnMinus.disabled = musique.hasVoted;
+
+          // Gestionnaire pour augmenter le score
+          btnPlus.addEventListener('click', (event) => {
+              observable.plus(index); // Utilise la méthode plus() du modèle
+          });
+
+          // Gestionnaire pour diminuer le score
+          btnMinus.addEventListener('click', (event) => {
+              observable.moins(index); // Utilise la méthode moins() du modèle
+          });
+
+          li.appendChild(img);
+          li.appendChild(text);
+          li.appendChild(scoreText);
+          li.appendChild(btnPlus);
+          li.appendChild(btnMinus);
+
+          this.view.fileAttente.appendChild(li);
       });
-    }
   }
 }
+
+
+
 
 
 
@@ -231,12 +251,12 @@ class Controler {
       if (this.model.salleChoisie && this.model.ville) {
         this.model.setMessageAffichage();
         document.title = `${this.model.salleChoisie.name} à ${this.model.ville}`;
-
         this.view.sallesList.style.display = 'none'; // vire les salles
         this.view.salleChoisie.style.display = 'none'; // vire la salle choisie
         this.view.confirmer.style.display = 'none'; // vire le bouton confirmer
         this.view.champRecherche.style.display = 'none'; // vire le champ de recherche
         this.view.subtitle.style.display = 'none'; // vire le sous-titre
+        this.view.resVille.style.display = 'none'; // vire le message de sélection de ville
         this.view.champMusique.style.display = 'block'; // affiche le champ de recherche de musique
         this.view.title.textContent = `Connecté à ${this.model.salleChoisie.name} de ${this.model.ville}!`;
 
@@ -244,16 +264,15 @@ class Controler {
         // Affiche un message d'erreur si aucune salle ou ville n'est sélectionnée
         alert("Veuillez sélectionner une ville et une salle avant de confirmer.");
       }
-
     });
-
-
-
+  
     let actionChangeSuggestionsMusique = (event) => {
       this.model.changeSuggestionsMusique(event.target.value);
     };
     
     this.view.champMusique.addEventListener('input', actionChangeSuggestionsMusique);
+
+
 
 
   }

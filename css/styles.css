@@ -279,3 +279,20 @@ body {
 .file-attente:empty {
   display: none;
 }
+
+.music-score {
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
+
+.btn-plus, .btn-minus {
+  margin: 5px 3px;
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}

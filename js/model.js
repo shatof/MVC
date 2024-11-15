@@ -86,9 +86,34 @@ class Model extends Observable {
     }
     
     ajouterALaFile(musique) {
-        this.fileAttente.push(musique);
+        this.fileAttente.push({
+            title: musique.title,
+            artist: musique.artist,
+            cover: musique.cover,
+            score: 0,         
+        });
         this.setChanged();
         this.notifyObservers();
+    }
+
+    plus(index) {
+        const musique = this.fileAttente[index];
+        if (!musique.hasVoted) {
+            musique.score += 1;
+            musique.hasVoted = true;
+            this.setChanged();
+            this.notifyObservers();
+        }
+    }
+
+    moins(index) {
+        const musique = this.fileAttente[index];
+        if (!musique.hasVoted) {
+            musique.score -= 1;
+            musique.hasVoted = true;
+            this.setChanged();
+            this.notifyObservers();
+        }
     }
 
     
