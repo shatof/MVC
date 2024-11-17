@@ -274,6 +274,8 @@ class Controler {
         this.view.subtitle.textContent = `Connecté à ${this.model.salleChoisie.name} de ${this.model.ville}`;
         this.view.fileAttenteContainer.style.display = 'flex';
         this.view.fileAttenteTitle.style.display = 'block';
+        this.view.parametres.style.display = 'block'; // Affiche le bouton paramètres
+
 
         document.getElementById('title').textContent = 'Accueil';
 
@@ -289,7 +291,13 @@ class Controler {
     this.view.champMusique.addEventListener('input', actionChangeSuggestionsMusique);
 
 
-
+    this.view.parametres.addEventListener('click', () => {
+      this.view.menu.style.display = 'flex'; 
+    });
+    
+    this.view.menu.addEventListener('click', () => {
+      this.view.menu.style.display = 'none'; 
+    });
 
   }
 

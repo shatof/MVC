@@ -60,6 +60,18 @@ class View {
     this.fileAttenteContainer.style.display = 'none'; 
     this.div.appendChild(this.fileAttenteContainer);
 
+    this.parametres = document.createElement('button');
+    this.parametres.className = 'param-button';
+    this.parametres.style.display = 'none'; 
+    this.parametres.innerHTML = '<img src="logo/menu.png" alt="menu">';
+    this.div.appendChild(this.parametres);
+    
+    this.menu = document.createElement('div');
+    this.menu.className = 'menu';
+    this.menu.style.display = 'none'; 
+    this.menu.innerHTML = '<img src="logo/param.png" alt="param">';
+    this.div.appendChild(this.menu);
+
 
     // pour le css
 
@@ -72,7 +84,7 @@ class View {
     this.suggestionsMusiqueList.className = 'suggestionsMusiqueList';
     this.fileAttente.className = 'file-attente';
     this.subtitle.className = 'subtitle-bar';
-    this.fileAttenteContainer.className = 'file-attente-container'; // Classe pour le style
+    this.fileAttenteContainer.className = 'file-attente-container'; //  pour le style
 
 
 
