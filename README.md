@@ -1,7 +1,7 @@
 ## Projet IHM
 Ce projet a été réalisé en travail personnel par ATOF Shaïn M1ATAL avec pour objectif de s'entraîner à utiliser le design pattern d'Observeur et Observable
 
-Le LLM ChatGPT 3.5 a été utilisé exclusivement pour les parties suivantes : 
+Le LLM ChatGPT 4o mini a été utilisé exclusivement pour les parties suivantes : 
 — CSS
 — Ajout de l'API apple music
 
@@ -28,4 +28,4 @@ Le LLM ChatGPT 3.5 a été utilisé exclusivement pour les parties suivantes :
 
 Les difficultés rencontrées lors de ce projets étaient que je partais de zéro quand au developpement de page web.
 
-De plus beaucoup d'éléments (liste des villes, liste des musiques, file d'attente) sont générés sur le moment donc dans des listes, il a donc été assez difficile de réussir à generer des attributs pour chaque element de ces listes 
+De plus beaucoup d'éléments (liste des villes, liste des musiques, file d'attente) sont générés sur le moment donc dans des listes, il a donc été assez difficile de réussir à generer des attributs dans le Model pour chaque element de ces listes 

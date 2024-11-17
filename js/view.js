@@ -2,17 +2,10 @@ class View {
   constructor() {
     this.div = document.createElement('div');
 
-    //Si on est dans l'indexe
-    this.title = document.createElement('h1');
-    this.title.textContent = 'CHOIX SALLE';
-    this.div.appendChild(this.title);
-
-    // Add sous-titre
     this.subtitle = document.createElement('p');
     this.subtitle.textContent = 'Veuillez choisir votre salle d\'entraînement avant de démarrer votre expérience.';
     this.div.appendChild(this.subtitle);
 
-    // Champ de recherche
     this.champRecherche = document.createElement('input');
     this.champRecherche.type = 'text';
     this.champRecherche.placeholder = 'Rechercher une ville';
@@ -32,21 +25,17 @@ class View {
     // this.resSalle.textContent = '';
     // this.div.appendChild(this.resSalle);
 
-    // Liste des suggestions des salles
     this.sallesList = document.createElement('div');
     this.div.appendChild(this.sallesList);
 
-    // Résultat salle choisie
     this.salleChoisie = document.createElement('text');
     this.salleChoisie.textContent = '';
     this.div.appendChild(this.salleChoisie);
 
-    // Bouton confirmer
     this.confirmer = document.createElement('button');
     this.confirmer.textContent = 'Confirmer';
     this.div.appendChild(this.confirmer);
 
-    // Champ recherche musique
     this.champMusique = document.createElement('input');
     this.champMusique.type = 'text';
     this.champMusique.placeholder = 'Rechercher une musique';
@@ -59,15 +48,31 @@ class View {
     this.fileAttente = document.createElement('ul');
     this.div.appendChild(this.fileAttente);
 
+    this.fileAttenteTitle = document.createElement('h3');
+    this.fileAttenteTitle.textContent = 'Musiques à suivre';
+    this.fileAttenteTitle.style.display = 'none'; 
+
+    this.fileAttenteTitle.className = 'file-attente-title'; 
+    this.div.appendChild(this.fileAttenteTitle);
+
+    this.fileAttenteContainer = document.createElement('div');
+    this.fileAttenteContainer.appendChild(this.fileAttente); 
+    this.fileAttenteContainer.style.display = 'none'; 
+    this.div.appendChild(this.fileAttenteContainer);
+
+
     // pour le css
-    
+
     this.div.className = 'div';
     this.confirmer.className = 'button';
+    this.champRecherche.className = 'search-input';
+    this.champMusique.className = 'search-input';
     this.suggestionsList.className = 'suggestionsList';
     this.sallesList.className = 'sallesList';
     this.suggestionsMusiqueList.className = 'suggestionsMusiqueList';
-    this.fileAttente.className = 'file-attente'; // Ajoute la classe CSS
-
+    this.fileAttente.className = 'file-attente';
+    this.subtitle.className = 'subtitle-bar';
+    this.fileAttenteContainer.className = 'file-attente-container'; // Classe pour le style
 
 
 

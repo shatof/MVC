@@ -1,46 +1,36 @@
-html {
-  font-size: 30px;
-  /* Augmenté */
-  font-family: 'Roboto', sans-serif;
-}
-
 body {
-  min-height: 100%;
-  height: 100%;
-  width: 100%;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  background-color: #EDF5E1;
-  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
-.outer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 80%;
-  max-width: 1200px;
-  margin: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
+
+#outer {
+  width: 100%;
+  margin: 10 auto;
+  box-sizing: border-box;
 }
+
 
 .div {
+  flex: 1; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 20px;
-  border: 1px solid #ebebeb;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 
 
@@ -48,9 +38,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #5CDB95;
-  height: 150px;
-  /* Augmenté */
+  background-color: #ffffff;
+  height: 75px;
   padding: 20px;
   width: 100%;
 }
@@ -63,35 +52,61 @@ body {
   flex-grow: 1;
   background-color: #447958;
   border: 1px #379683 solid;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 #title {
-  color: #e0e0e0;
+  font-family: "Jaro", sans-serif;
+  color: #000000;
   font-size: 2.5rem;
-  /* Augmenté */
+  margin-bottom: 10px;
 }
 
+
 .button {
-  padding: 10px 20px;
-  font-size: 1rem;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
   background-color: #5CDB95;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background-color 0.3s ease;
+  z-index: 100;
 }
 
 .button:hover {
   background-color: #379683;
 }
 
+
+.subtitle-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  border-radius: 5px;
+}
+
+
 .textField {
-  margin: 0px 0px 0px 20px;
+  margin: 0px 0px 0px 0px;
 }
 
 .suggestionsList {
+  width: 50%;
   list-style-type: none;
   padding: 0;
   margin: 10px 0;
@@ -99,19 +114,20 @@ body {
 
 .suggestionsList li {
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #d8d8d8;
   cursor: pointer;
 }
 
 .suggestionsList li:hover {
   background-color: #e0e0e0;
-  /* Gris clair lorsqu'on passe la souris */
+ 
 }
 
 .sallesList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
   margin-top: 20px;
 }
 
@@ -119,44 +135,42 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
-  padding: 20px;
-  border: 2px solid #ddd;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
   border-radius: 10px;
+  text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  width: 200px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
-  /* Indique que c'est cliquable */
 }
 
+
 .salle:hover {
-  background-color: #e0e0e0;
-  /* Gris clair lorsqu'on passe la souris */
+  transform: scale(1.05);
+  background-color: #f9f9f9;
 }
 
 .salle.selected {
   border: 3px solid #5CDB95;
-  /* Bordure verte pour indiquer la sélection */
   background-color: #d4f5e9;
-  /* Couleur de fond différente pour indiquer la sélection */
 }
 
 .salle-logo {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
-.salle-name {
-  font-size: 1.5rem;
-  margin: 10px 0;
-}
-
-.salle-address {
-  font-size: 1rem;
+.salle-name, .salle-address {
+  font-size: 0.8rem;
   color: #555;
+  margin-top: 5px;
+  text-align: center;
 }
 
 
@@ -165,7 +179,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  /* Optionnel : ajoute un espace au-dessus du bouton */
+ 
 }
 
 .notification {
@@ -174,13 +188,12 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background-color: #28a745;
-  /* Vert pour succès */
+ 
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
-  font-size: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: 100s;
   display: none;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -196,7 +209,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Style de la liste des suggestions */
+
 .suggestionsMusiqueList {
   list-style: none;
   padding: 0;
@@ -208,7 +221,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Style des éléments de la liste des suggestions */
+
 .suggestionsMusiqueList li {
   display: flex;
   align-items: center;
@@ -217,7 +230,7 @@ body {
   transition: background-color 0.2s;
 }
 
-/* Image de la pochette de musique */
+
 .music-cover {
   width: 40px;
   height: 40px;
@@ -225,74 +238,231 @@ body {
   margin-right: 10px;
 }
 
-/* Texte du titre et de l'artiste */
+
 .suggestionsMusiqueList li span {
-  font-size: 14px;
   color: #333;
 }
 
-/* Effet au survol */
+
 .suggestionsMusiqueList li:hover {
   background-color: #f0f0f0;
 }
 
-/* Style quand un élément est sélectionné */
+
 .suggestionsMusiqueList li.selected {
   background-color: #e0e0ff;
 }
 
-/* Style pour la liste de la file d'attente */
+
+
 .file-attente {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  /* Permet de défiler horizontalement si trop d'éléments */
+  flex-wrap: nowrap;
+  gap: 5px;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
-/* Style pour chaque élément de la file d'attente */
+
 .file-attente li {
-  list-style: none;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   width: 80px;
+  height: 110px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-/* Style de l'image de couverture dans la file d'attente */
+
+.file-attente li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 .file-attente .music-cover {
-  width: 60px;
-  height: 60px;
-  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
-/* Style pour le texte du titre et de l'artiste */
+
+
 .file-attente span {
-  display: block;
-  font-size: 12px;
   color: #333;
+  font-size: 0.7rem;
+  line-height: 1.1;
+  text-align: center;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+
+
+
+.button-container {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
   margin-top: 5px;
 }
 
-.file-attente:empty {
-  display: none;
-}
-
-.music-score {
-  font-size: 14px;
-  margin-top: 5px;
-  display: block;
-}
 
 .btn-plus, .btn-minus {
-  margin: 5px 3px;
   padding: 3px 8px;
-  font-size: 12px;
+  font-size: 0.8rem;
+  background-color: #5CDB95;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.btn-plus:hover, .btn-minus:hover {
+  background-color: #379683;
+}
+
+
+.music-score {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .hidden {
   display: none;
 }
+
+.file-attente-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+
+.suggestionsMusiqueList {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestionsMusiqueList li {
+  display: flex; 
+  align-items: center; 
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+
+
+.file-attente-title {
+  font-family: "Jaro", sans-serif;
+  font-weight: bold;
+  text-align: center;
+
+  color: #333;
+}
+
+
+.file-attente-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-input {
+  width: 80%;
+  max-width: 400px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.search-input:focus {
+  border-color: #5CDB95;
+  box-shadow: 0 0 10px rgba(92, 219, 149, 0.4);
+}
+
+@media (max-width: 768px) {
+  .search-input {
+      width: 90%;
+      max-width: 300px;
+      padding: 10px;
+  }
+
+  .button {
+      width: 50%;
+      padding: 10px;
+  }
+
+  .salle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .salle-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .salle-name, .salle-address {
+        font-size: 0.7rem;
+    }
+
+
+  .file-attente li {
+      width: 100px;
+      height: 200px;
+  }
+
+  .file-attente .music-cover {
+      width: 40px;
+      height: 40px;
+  }
+
+}
+
