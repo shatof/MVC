@@ -1,9 +1,6 @@
 ## Projet IHM
-Ce projet a été réalisé en travail personnel par ATOF Shaïn M1ATAL avec pour objectif de s'entraîner à utiliser le design pattern d'Observeur et Observable
+Projet a été réalisé en travail personnel avec pour objectif de s'entraîner à utiliser le design pattern d'Observeur et Observable
 
-Le LLM ChatGPT 4o mini a été utilisé exclusivement pour les parties suivantes : 
-— CSS
-— Ajout de l'API apple music
 
 # Fonctionnalités 
 
